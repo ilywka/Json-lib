@@ -1,7 +1,7 @@
 <project name="json-lib" default="compile" basedir="." xmlns:artifact="urn:maven-artifact-ant">
    <property file="${user.home}/.m2/maven.properties" />
    <property file="build.properties" />
-   <property name="maven.project.build.finalName" value="json-lib-2.4.1" />
+   <property name="maven.project.build.finalName" value="json-lib-2.4.1-perf" />
    <property name="maven.build.output" value="target/classes" />
    <property name="maven.build.directory" value="target" />
    <property name="maven.test.reports" value="${maven.build.directory}/test-reports" />
@@ -40,7 +40,7 @@
 
    <target name="compile" description="Compile the code (jdk1.3)">
       <mkdir dir="${maven.build.output}" />
-      <javac destdir="${maven.build.output}" excludes="**/package.html" debug="true" deprecation="true" source="1.3" target="1.1">
+      <javac destdir="${maven.build.output}" excludes="**/package.html" debug="true" deprecation="true" source="1.8" target="1.8">
          <src path="${project.src.jdk3.dir}" />
          <classpath refid="build.classpath" />
       </javac>
@@ -49,7 +49,7 @@
    <target name="compile.jdk5" depends="compile" description="Compile the code (jdk5)">
       <delete file="${maven.build.output}/net/sf/json/JSONObject.class" />
       <delete file="${maven.build.output}/net/sf/json/JSONArray.class" />
-      <javac destdir="${maven.build.output}" debug="true" deprecation="true" source="1.5" target="1.5">
+      <javac destdir="${maven.build.output}" debug="true" deprecation="true" source="1.8" target="1.8">
          <src path="${project.src.jdk5.dir}" />
          <classpath>
             <path refid="build.classpath" />
@@ -69,7 +69,7 @@
 
    <target name="compile-tests" depends="junit-present, compile" description="Compile the test code (jdk1.3)" if="junit.present">
       <mkdir dir="${maven.test.output}" />
-      <javac destdir="${maven.test.output}" debug="true" deprecation="true" optimize="false" source="1.3" target="1.1">
+      <javac destdir="${maven.test.output}" debug="true" deprecation="true" optimize="false" source="1.8" target="1.8">
          <src path="${project.test.jdk3.dir}" />
          <classpath>
             <path refid="build.classpath" />
@@ -84,7 +84,7 @@
 
    <target name="compile-tests.jdk5" depends="junit-present, compile.jdk5, compile-tests" description="Compile the test code (jdk5)" if="junit.present">
       <mkdir dir="${maven.test.output}" />
-      <javac destdir="${maven.test.output}" debug="true" deprecation="true" optimize="false" source="1.5" target="1.5">
+      <javac destdir="${maven.test.output}" debug="true" deprecation="true" optimize="false" source="1.8" target="1.8">
          <src path="${project.test.jdk5.dir}" />
          <classpath>
             <path refid="build.classpath" />
@@ -193,7 +193,7 @@
    </target>
 
    <target name="jar.jdk5" depends="clean,test.jdk5" description="Binary jar (jdk5)">
-      <jar jarfile="${maven.build.directory}/${maven.project.build.finalName}-jdk15.jar" basedir="${maven.build.output}" excludes="**/package.html" />
+      <jar jarfile="${maven.build.directory}/${maven.project.build.finalName}.jar" basedir="${maven.build.output}" excludes="**/package.html" />
    </target>
 
    <target name="jarjar" depends="jar">
@@ -256,7 +256,7 @@
             <include name="**/*.java" />
          </fileset>
       </copy>
-      <jar jarfile="${maven.build.directory}/${maven.project.build.finalName}-jdk15-sources.jar" basedir="${maven.build.directory}/source/jdk15" />
+      <jar jarfile="${maven.build.directory}/${maven.project.build.finalName}-sources.jar" basedir="${maven.build.directory}/source/jdk15" />
    </target>
 
    <target name="javadoc" description="Build javadocs (jdk1.3)" depends="setup">

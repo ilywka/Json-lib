@@ -876,6 +876,21 @@ public class TestUserSubmitted extends TestCase {
        assertTrue(data instanceof String);
        assertEquals("[1,2,3]", data);
    }
+
+  public void testPerfBug() {
+    String jsonStr = "{\"toString\":\"{{-- BOFF}}\\r\\n{{drop index boff_sdfe_uk1;}}\\r\\n\\r\\n{{create unique index boff_sdfe_uk1 }}\\r\\n{{on boff_sys_difference}}\\r\\n{{(name_send, table_name)}}\\r\\n{{logging}}\\r\\n{{tablespace p1boff002}}\\r\\n{{;}}\\r\\n\\r\\n{{alter table boff_sys_difference}}\\r\\n{{drop constraint boff_sdfe_uk1}}\\r\\n{{;}}\\r\\n\\r\\n{{alter table boff_sys_difference}}\\r\\n{{add constraint boff_sdfe_uk1}}\\r\\n{{unique (name_send, table_name)}}\\r\\n{{using index boff_sdfe_uk1}}\\r\\n{{enable validate}}\\r\\n{{;}}\"}";
+    JSONObject json = null;
+    json = JSONObject.fromObject(jsonStr);
+    System.out.println(json);
+
+    jsonStr = "{\"qwe\":{\"toString\":\"{{-- BOFF}}\\r\\n{{drop index boff_sdfe_uk1;}}\\r\\n\\r\\n{{create unique index boff_sdfe_uk1 }}\\r\\n{{on boff_sys_difference}}\\r\\n{{(name_send, table_name)}}\\r\\n{{logging}}\\r\\n{{tablespace p1boff002}}\\r\\n{{;}}\\r\\n\\r\\n{{alter table boff_sys_difference}}\\r\\n{{drop constraint boff_sdfe_uk1}}\\r\\n{{;}}\\r\\n\\r\\n{{alter table boff_sys_difference}}\\r\\n{{add constraint boff_sdfe_uk1}}\\r\\n{{unique (name_send, table_name)}}\\r\\n{{using index boff_sdfe_uk1}}\\r\\n{{enable validate}}\\r\\n{{;}}\"}}";
+    json = JSONObject.fromObject(jsonStr);
+    System.out.println(json);
+
+    jsonStr = "{\"items\":[{\"toString\":\"{{-- BOFF}}\\r\\n{{drop index boff_sdfe_uk1;}}\\r\\n\\r\\n{{create unique index boff_sdfe_uk1 }}\\r\\n{{on boff_sys_difference}}\\r\\n{{(name_send, table_name)}}\\r\\n{{logging}}\\r\\n{{tablespace p1boff002}}\\r\\n{{;}}\\r\\n\\r\\n{{alter table boff_sys_difference}}\\r\\n{{drop constraint boff_sdfe_uk1}}\\r\\n{{;}}\\r\\n\\r\\n{{alter table boff_sys_difference}}\\r\\n{{add constraint boff_sdfe_uk1}}\\r\\n{{unique (name_send, table_name)}}\\r\\n{{using index boff_sdfe_uk1}}\\r\\n{{enable validate}}\\r\\n{{;}}\"}]}";
+    json = JSONObject.fromObject(jsonStr);
+    System.out.println(json);
+  }
    /*
    public void testBug_3074732() {
        String test = "{\"c\":\"{\\\"k\\\":\\\"k\\\", \\\"l\\\":\\\"l\\\"}\"}";

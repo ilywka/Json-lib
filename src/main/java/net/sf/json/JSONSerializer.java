@@ -97,20 +97,22 @@ public class JSONSerializer {
       JSON json = null;
       if( object == null ){
          json = JSONNull.getInstance();
-      }else if( object instanceof JSONString ){
-         json = toJSON( (JSONString) object, jsonConfig );
-      }else if( object instanceof String ){
-         json = toJSON( (String) object, jsonConfig );
-      }else if( JSONUtils.isArray( object ) ){
-         json = JSONArray.fromObject( object, jsonConfig );
-      }else{
-         try{
-            json = JSONObject.fromObject( object, jsonConfig );
-         }catch( JSONException e ){
-            if( object instanceof JSONTokener ){
+      } else if (object instanceof JSON) {
+         json =((JSON) object);
+      } else if (object instanceof JSONString) {
+         json = toJSON((JSONString) object, jsonConfig);
+      } else if (object instanceof String) {
+         json = toJSON((String) object, jsonConfig);
+      } else if (JSONUtils.isArray(object)) {
+         json = JSONArray.fromObject(object, jsonConfig);
+      } else {
+         try {
+            json = JSONObject.fromObject(object, jsonConfig);
+         } catch (JSONException e) {
+            if (object instanceof JSONTokener) {
                ((JSONTokener) object).reset();
             }
-            json = JSONArray.fromObject( object, jsonConfig );
+            json = JSONArray.fromObject(object, jsonConfig);
          }
       }
 
