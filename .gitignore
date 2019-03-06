@@ -8,3 +8,5 @@ build.properties
 .settings
 build.sh
 build
+.idea
+/*.iml
